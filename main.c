@@ -96,7 +96,6 @@ void remove_res(){
     }
     remove_resistor(&head, resistor_pos);
 }
-
 void check_connectivity(){
     int first_column, second_column;
     printf("Choose what colums to check for connectivity, start by choosing the first column \nFirst column:");
@@ -156,6 +155,22 @@ static void show_menu(){
     }
 }
 int main(int argc, const char * argv[]){
+    // Lazy test
+    /*
+    create_new_resistor(2, 1, 3);
+
+    create_new_resistor(3, 2, 4);
+
+    create_new_resistor(5, 5, 5);
+
+    create_new_resistor(4, 6, 8);
+
+    create_new_resistor(5, 1, 7);
+
+    create_new_resistor(3, 4, 2);
+
+    create_new_resistor(6, 2, 2);
+    */
     while(true){
         show_menu();
     }
