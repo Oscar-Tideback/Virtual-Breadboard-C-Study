@@ -12,7 +12,7 @@ int total_resistors = 0;
 //Writing all the resistors of the linked list to the resistors.txt file
 void write_file(char filename[], resistor *head){
     resistor *temp_res = head;  
-    FILE* file;
+    FILE *file;
     file = fopen (filename, "w");
     if (file == NULL){
         fprintf(stderr, "\nCouldn't open file'\n");
@@ -26,16 +26,17 @@ void write_file(char filename[], resistor *head){
 }
 //Reading all the resistors of the file and returns a head*
 resistor *read_file(char filename[]){   
-    resistor *temp_res = (resistor *)malloc(sizeof(resistor));;
+    resistor *temp_res = (resistor *)malloc(sizeof(resistor));
     resistor *head;
     resistor *last_res;
     last_res = NULL;
     head = NULL;
+    total_resistors = 0;
     
     FILE *file;
     file = fopen (filename, "r");
     if (file == NULL){
-        fprintf(stderr, "\nCouldn't Open File'\n");
+        fprintf(stderr, "\nCouldn't open file'\n");
         exit (1);
     }
     while(fread(temp_res, sizeof(resistor), 1, file)){  
@@ -45,12 +46,14 @@ resistor *read_file(char filename[]){
         else{
             last_res->next = (resistor *)malloc(sizeof(resistor));
             last_res = last_res->next;
+
         }
         last_res->length = temp_res->length;
         last_res->starting_column = temp_res->starting_column;
         last_res->ending_column = temp_res->ending_column;
         last_res->row = temp_res->row;
-        last_res->next = NULL;         
+        last_res->next = NULL;   
+        total_resistors++;      
     } 
     fclose(file);
     return head;
@@ -110,11 +113,14 @@ void check_connectivity(){
     }
     find_connections(first_column, visited_array);
     if(visited_array[second_column] == 1){
-        printf("\nYeay! Column:%d and column:%d is connected\n", first_column, second_column);
+        printf("\nYeay! Column:%d and column:%d is connected\n", first_column + 1, second_column + 1);
     }
     else {
-        printf("\nSorry, column:%d and column:%d is NOT connected\n", first_column, second_column);
+        printf("\nSorry, column:%d and column:%d is NOT connected\n", first_column + 1, second_column + 1);
     }
+}
+void count_res(){
+    printf("\nTotal number of resistors on board is:%d\n", total_resistors);
 }
 static void show_menu(){
     int choice;
@@ -125,7 +131,8 @@ static void show_menu(){
     printf("4: Check if connected\n");
     printf("5: Read saved board file\n");
     printf("6: Save this board to file\n");
-    printf("7: Exit program\n");
+    printf("7: Count resistors and combined length on board\n");
+    printf("8: Exit program\n");
     scanf("%d", &choice);
     getc(stdin);
     switch (choice) {
@@ -148,6 +155,9 @@ static void show_menu(){
             write_file("resistors.txt", head);
             break;
         case 7:
+            count_res();
+            break; 
+        case 8:
             exit(0);
             break;
         default:
