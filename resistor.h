@@ -11,5 +11,5 @@ void create_new_resistor(int length, int column, int row);
 resistor *find_resistor(int column, int row);
 int find_resistor_in_link(int column, int row);
 void remove_resistor(resistor **head, int resistor_to_remove);
-void save_resistor_list_to_file();
+int total_res_length(resistor *head);
 #endif 

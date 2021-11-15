@@ -120,7 +120,7 @@ void check_connectivity(){
     }
 }
 void count_res(){
-    printf("\nTotal number of resistors on board is:%d\n", total_resistors);
+    printf("\nTotal number of resistors on board is: %d, \ntotal length of all resistors on board is: %d\n", total_resistors, total_res_length(head));
 }
 static void show_menu(){
     int choice;

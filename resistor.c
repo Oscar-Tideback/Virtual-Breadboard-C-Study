@@ -64,6 +64,13 @@ void remove_resistor(resistor **head, int resistor_to_remove){
         current_res = NULL;
     }
 }
-void save_resistor_list_to_file(){
- 
+
+int total_res_length(resistor *head){
+    resistor *temp_res = head;
+    int total_length = 0;
+       while(temp_res != NULL){
+            total_length = total_length + temp_res->length;
+            temp_res = temp_res->next;
+       }
+       return total_length;
 }
